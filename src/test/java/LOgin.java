@@ -56,28 +56,25 @@ public class LOgin {
         // ==========================
         // Username - matches screenshot placeholder "Email or Username"
         WebElement username = wait.until(ExpectedConditions.visibilityOfElementLocated(
-                By.xpath("//input[contains(@placeholder,'Email') or contains(@placeholder,'Username') or contains(@name,'email') or contains(@name,'username') or contains(@id,'Username')]")));
+                By.name("emailOrUsername")));
         username.clear();
         username.sendKeys("rajeevyd1");
-        System.out.println("Username entered");
-
+        System.out.println("Username entered: " + username.getAttribute("value"));
 
         // ==========================
         // 4️⃣ Enter Password
         // ==========================
         // Password - screenshot shows lock icon, standard type='password'
         WebElement password = wait.until(ExpectedConditions.visibilityOfElementLocated(
-                By.xpath("//input[@type='password' or contains(@placeholder,'Password') or contains(@name,'password') or contains(@id,'Password')]")));
+                By.xpath("//input[@name='password' and @type='password']")));
         password.clear();
-        password.sendKeys("WrongPassword123");
-        System.out.println("Password entered");
-        // intentionally wrong
-
+        password.sendKeys("Rajeevyd@1");
+        System.out.println("Password length: " + password.getAttribute("value").length() + " chars");
         // ==========================
         // 5️⃣ Click Submit
         // ==========================
         WebElement submitBtn = wait.until(ExpectedConditions.elementToBeClickable(
-                By.xpath("//button[@type='submit' or contains(text(),'Login') or contains(text(),'LOGIN')]")
+                By.xpath("//button[@type='login' or contains(text(),'LOGIN') or contains(text(),'LOGIN')]")
         ));
 
         ((JavascriptExecutor) driver).executeScript("arguments[0].click();", submitBtn);
