@@ -68,7 +68,7 @@ public class LOgin {
         WebElement password = wait.until(ExpectedConditions.visibilityOfElementLocated(
                 By.xpath("//input[@name='password' and @type='password']")));
         password.clear();
-        password.sendKeys("Rajeevyd@1");
+        password.sendKeys("Rajeevyd@");
         System.out.println("Password length: " + password.getAttribute("value").length() + " chars");
         // ==========================
         // 5️⃣ Click Submit
@@ -86,7 +86,7 @@ public class LOgin {
         // ==========================
         try {
             WebElement errorMsg = wait.until(ExpectedConditions.visibilityOfElementLocated(
-                    By.xpath("//*[contains(text(),'Invalid') or contains(text(),'incorrect') or contains(text(),'wrong')]")
+                    By.xpath("//*[contains(text(),'Invalid ') or contains(text(),'incorrect') or contains(text(),'wrong')]")
             ));
 
             String errorText = errorMsg.getText();
@@ -100,6 +100,9 @@ public class LOgin {
         // ==========================
         // 7️⃣ Close Browser
         // ==========================
+        System.out.println("Press Enter to close...");
+        new java.util.Scanner(System.in).nextLine();
+
         driver.quit();
         System.out.println("Browser closed successfully.");
     }
