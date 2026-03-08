@@ -7,6 +7,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.JavascriptExecutor;
+
+import java.net.SocketOption;
 import java.time.Duration;
 
 public class LOgin {
@@ -68,7 +70,7 @@ public class LOgin {
         WebElement password = wait.until(ExpectedConditions.visibilityOfElementLocated(
                 By.xpath("//input[@name='password' and @type='password']")));
         password.clear();
-        password.sendKeys("Rajeevyd@");
+        password.sendKeys("Rajeevyd@1");
         System.out.println("Password length: " + password.getAttribute("value").length() + " chars");
         // ==========================
         // 5️⃣ Click Submit
@@ -86,7 +88,7 @@ public class LOgin {
         // ==========================
         try {
             WebElement errorMsg = wait.until(ExpectedConditions.visibilityOfElementLocated(
-                    By.xpath("//*[contains(text(),'Invalid ') or contains(text(),'incorrect') or contains(text(),'wrong')]")
+                    By.xpath("//*[contains(text(),'The username and password do not match.') or contains(text(),'incorrect') or contains(text(),'wrong')]")
             ));
 
             String errorText = errorMsg.getText();
@@ -97,6 +99,11 @@ public class LOgin {
             System.out.println("⚠ No error message found. Possibly login success.");
         }
 
+
+
+        WebElement ResourceBtn = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[contains(text(),'Resource Corner')]")));
+        ((JavascriptExecutor) driver).executeScript("arguments[0].click();", ResourceBtn);
+        System.out.println("MenuIcon clicked successfully");
         // ==========================
         // 7️⃣ Close Browser
         // ==========================
