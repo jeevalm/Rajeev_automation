@@ -93,17 +93,35 @@ public class LOgin {
 
             String errorText = errorMsg.getText();
             System.out.println("Error Message Displayed: " + errorText);
-            System.out.println("✅ Test Passed - Error message displayed correctly.");
+            System.out.println("Test Passed - Error message displayed correctly.");
 
         } catch (Exception e) {
             System.out.println("⚠ No error message found. Possibly login success.");
         }
 
 
+        // Resource Corner
 
-        WebElement ResourceBtn = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[contains(text(),'Resource Corner')]")));
-        ((JavascriptExecutor) driver).executeScript("arguments[0].click();", ResourceBtn);
-        System.out.println("MenuIcon clicked successfully");
+//        WebElement ResourceBtn = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[contains(text(),'Resource Corner')]")));
+//        ((JavascriptExecutor) driver).executeScript("arguments[0].click();", ResourceBtn);
+//        System.out.println("MenuIcon clicked successfully");
+
+        // Home Button
+
+        WebElement HomeBtn = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[contains(text(),'Profile')]")));
+        ((JavascriptExecutor) driver).executeScript("arguments[0].click();", HomeBtn);
+        System.out.println("Home Button clicked successfully");
+
+        WebElement deleteBtn = wait.until(ExpectedConditions.presenceOfElementLocated(
+                By.xpath("//button[contains(@class,'AccountSettings_deleteButton') and contains(text(),'Delete Now')]")));
+
+
+        ((JavascriptExecutor) driver).executeScript(
+                "arguments[0].scrollIntoView({block: 'center', behavior: 'smooth'});", deleteBtn);
+
+
+        ((JavascriptExecutor) driver).executeScript("arguments[0].click();", deleteBtn);
+        System.out.println("'Delete Now' button scrolled & clicked successfully");
         // ==========================
         // 7️⃣ Close Browser
         // ==========================
