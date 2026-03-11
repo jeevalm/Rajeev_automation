@@ -52,14 +52,14 @@ public class BookAppointment {
         WebElement username = wait.until(ExpectedConditions.visibilityOfElementLocated(
                 By.name("emailOrUsername")));
         username.clear();
-        username.sendKeys("rajeevyd1");
+        username.sendKeys("rajeevyd6");
         System.out.println("Username entered: " + username.getAttribute("value"));
 
       // password
         WebElement password = wait.until(ExpectedConditions.visibilityOfElementLocated(
                 By.xpath("//input[@name='password' and @type='password']")));
         password.clear();
-        password.sendKeys("Rajeevyd@1");
+        password.sendKeys("Rajeevyd@6");
         System.out.println("Password length: " + password.getAttribute("value").length() + " chars");
 
     // click submit
@@ -96,6 +96,8 @@ public class BookAppointment {
 
         ((JavascriptExecutor) driver).executeScript("arguments[0].click();", AppointBtn);
 
+        WebElement AppointMode = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//button[contains(@class,'mdc-button__label') and contains(text(),'CONTINUE')]")));
+        ((JavascriptExecutor) driver).executeScript("arguments[0].click();", AppointMode);
 
         // close browser
 
