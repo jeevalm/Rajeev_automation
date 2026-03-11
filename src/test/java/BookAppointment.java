@@ -4,15 +4,13 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.devtools.v85.profiler.model.Profile;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.JavascriptExecutor;
 
-import java.net.SocketOption;
 import java.time.Duration;
 
-public class LOgin {
+public class BookAppointment {
 
     public static void main(String[] args) {
 
@@ -26,9 +24,7 @@ public class LOgin {
         driver.get("https://staging-app.yourdost.com/");
         System.out.println("Page Title: " + driver.getTitle());
 
-        // ==========================
-        // 1️⃣ Handle Cookie Popup
-        // ==========================
+       // I agree pop-up
         try {
             WebElement cookieBtn = wait.until(ExpectedConditions.elementToBeClickable(
                     By.xpath("//button[contains(text(),'Accept') or contains(text(),'I agree') or contains(text(),'OK')]")
@@ -40,9 +36,7 @@ public class LOgin {
             System.out.println("No cookie popup present.");
         }
 
-        // ==========================
-        // 2️⃣ Click Login/Signup Button
-        // ==========================
+        // click login
         WebElement loginBtn = wait.until(
                 ExpectedConditions.presenceOfElementLocated(
                         By.xpath("//*[contains(text(),'Login')]")
@@ -54,28 +48,21 @@ public class LOgin {
 
         System.out.println("Login button clicked successfully.");
 
-        // ==========================
-        // 3️⃣ Enter Username
-        // ==========================
-        // Username - matches screenshot placeholder "Email or Username"
+        // username
         WebElement username = wait.until(ExpectedConditions.visibilityOfElementLocated(
                 By.name("emailOrUsername")));
         username.clear();
         username.sendKeys("rajeevyd1");
         System.out.println("Username entered: " + username.getAttribute("value"));
 
-        // ==========================
-        // 4️⃣ Enter Password
-        // ==========================
-        // Password - screenshot shows lock icon, standard type='password'
+      // password
         WebElement password = wait.until(ExpectedConditions.visibilityOfElementLocated(
                 By.xpath("//input[@name='password' and @type='password']")));
         password.clear();
         password.sendKeys("Rajeevyd@1");
         System.out.println("Password length: " + password.getAttribute("value").length() + " chars");
-        // ==========================
-        // 5️⃣ Click Submit
-        // ==========================
+
+    // click submit
         WebElement submitBtn = wait.until(ExpectedConditions.elementToBeClickable(
                 By.xpath("//button[@type='login' or contains(text(),'LOGIN') or contains(text(),'LOGIN')]")
         ));
@@ -84,9 +71,8 @@ public class LOgin {
 
         System.out.println("Login submitted.");
 
-        // ==========================
-        // 6️⃣ Validate Error Message
-        // ==========================
+        // error message
+
         try {
             WebElement errorMsg = wait.until(ExpectedConditions.visibilityOfElementLocated(
                     By.xpath("//*[contains(text(),'The username and password do not match.') or contains(text(),'incorrect') or contains(text(),'wrong')]")
@@ -101,33 +87,18 @@ public class LOgin {
         }
 
 
-        // Resource Corner
-
-//        WebElement ResourceBtn = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[contains(text(),'Resource Corner')]")));
-//        ((JavascriptExecutor) driver).executeScript("arguments[0].click();", ResourceBtn);
-//        System.out.println("MenuIcon clicked successfully");
-
-        // Home Button
-
-        WebElement ProfileBtn = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[contains(text(),'Profile')]")));
-        ((JavascriptExecutor) driver).executeScript("arguments[0].click();", ProfileBtn);
-        System.out.println("Profile Button clicked successfully");
-
-
-        // Delete account Btn
-        WebElement deleteBtn = wait.until(ExpectedConditions.presenceOfElementLocated(
-                By.xpath("//button[contains(@class,'AccountSettings_deleteButton') and contains(text(),'Delete Now')]")));
-
-
+        // Clicking Book Appointment
+        WebElement AppointBtn = wait.until(ExpectedConditions.visibilityOfElementLocated(
+                By.xpath("//button[contains(@class,'OrganizationOfferingCard_actionButtonDesktop__zCQZK') and contains(text(), 'BOOK APPOINTMENT')]")));
         ((JavascriptExecutor) driver).executeScript(
-                "arguments[0].scrollIntoView({block: 'center', behavior: 'smooth'});", deleteBtn);
+                "arguments[0].scrollIntoView({block: 'center', behavior: 'smooth'});", AppointBtn);
 
 
-        ((JavascriptExecutor) driver).executeScript("arguments[0].click();", deleteBtn);
-        System.out.println("'Delete Now' button scrolled & clicked successfully");
-        // ==========================
-        // 7️⃣ Close Browser
-        // ==========================
+        ((JavascriptExecutor) driver).executeScript("arguments[0].click();", AppointBtn);
+
+
+        // close browser
+
         System.out.println("Press Enter to close...");
         new java.util.Scanner(System.in).nextLine();
 
