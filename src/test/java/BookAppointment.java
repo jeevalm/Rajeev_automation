@@ -92,12 +92,58 @@ public class BookAppointment {
                 By.xpath("//button[contains(@class,'OrganizationOfferingCard_actionButtonDesktop__zCQZK') and contains(text(), 'BOOK APPOINTMENT')]")));
         ((JavascriptExecutor) driver).executeScript(
                 "arguments[0].scrollIntoView({block: 'center', behavior: 'smooth'});", AppointBtn);
-
+        System.out.println("Book Appointment Button is clicked");
 
         ((JavascriptExecutor) driver).executeScript("arguments[0].click();", AppointBtn);
 
-        WebElement AppointMode = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//button[contains(@class,'mdc-button__label') and contains(text(),'CONTINUE')]")));
-        ((JavascriptExecutor) driver).executeScript("arguments[0].click();", AppointMode);
+        WebElement appointMode = wait.until(
+                ExpectedConditions.elementToBeClickable(
+                        By.xpath("//button[contains(@class,'alignment-continue-1')]//span[text()='CONTINUE']/ancestor::button")
+                ));
+
+        ((JavascriptExecutor) driver).executeScript("arguments[0].click();", appointMode);
+        System.out.println("SF flow button is clicked");
+
+        // CATEGORY DROPDOWN
+        WebElement categoryDropdown = wait.until(
+                ExpectedConditions.elementToBeClickable(
+                        By.xpath("//mat-label[text()='Category']/following::mat-select[1]")
+                ));
+        categoryDropdown.click();
+
+        // SELECT CATEGORY
+        WebElement category = wait.until(
+                ExpectedConditions.elementToBeClickable(
+                        By.xpath("//mat-option//span[normalize-space()='Relationship']")
+                ));
+        category.click();
+        System.out.println("Category selected");
+
+
+        // SUBCATEGORY DROPDOWN
+        WebElement subCategoryDropdown = wait.until(
+                ExpectedConditions.elementToBeClickable(
+                        By.xpath("//mat-label[text()='Sub Category']/following::mat-select[1]")
+                ));
+        subCategoryDropdown.click();
+
+        // SELECT SUBCATEGORY
+        WebElement subCategory = wait.until(
+                ExpectedConditions.elementToBeClickable(
+                        By.xpath("//mat-option//span[normalize-space()='Friends']")
+                ));
+        subCategory.click();
+        System.out.println("Subcategory selected");
+
+
+        // CONTINUE BUTTON
+        WebElement continueBtn = wait.until(
+                ExpectedConditions.elementToBeClickable(
+                        By.xpath("//button[.//span[normalize-space()='CONTINUE']]")
+                ));
+        continueBtn.click();
+        System.out.println("Continue clicked");
+
 
         // close browser
 
