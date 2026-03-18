@@ -63,12 +63,14 @@ public class BookAppointment {
         System.out.println("Password length: " + password.getAttribute("value").length() + " chars");
 
     // click submit
-        WebElement submitBtn = wait.until(ExpectedConditions.elementToBeClickable(
-                By.xpath("//button[@type='login' or contains(text(),'LOGIN') or contains(text(),'LOGIN')]")
-        ));
+//        WebElement submitBtn = wait.until(ExpectedConditions.elementToBeClickable(
+//                By.xpath("//button[@type='login' or contains(text(),'LOGIN') or contains(text(),'LOGIN')]")
+//        ));
+//
+//        ((JavascriptExecutor) driver).executeScript("arguments[0].click();", submitBtn);
 
-        ((JavascriptExecutor) driver).executeScript("arguments[0].click();", submitBtn);
 
+        driver.findElement(By.xpath("//button[@type='login' or contains(text(),'LOGIN') or contains(text(),'LOGIN')]")).click();
         System.out.println("Login submitted.");
 
         // error message
@@ -96,6 +98,8 @@ public class BookAppointment {
 
         ((JavascriptExecutor) driver).executeScript("arguments[0].click();", AppointBtn);
 
+
+        // SF Flow
         WebElement appointMode = wait.until(
                 ExpectedConditions.elementToBeClickable(
                         By.xpath("//button[contains(@class,'alignment-continue-1')]//span[text()='CONTINUE']/ancestor::button")
@@ -145,6 +149,10 @@ public class BookAppointment {
         System.out.println("Continue clicked");
 
 
+        driver.findElement(By.xpath("//*[contains(@class,'font-bold color-light-grey font-1 mode') and contains(text(), ' VIDEO CALL ')]")).click();
+
+
+        driver.findElement(By.xpath("//button[.//span[normalize-space()=' SELECT ']]")).click();
         // close browser
 
         System.out.println("Press Enter to close...");
