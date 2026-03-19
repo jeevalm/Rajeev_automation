@@ -9,6 +9,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.JavascriptExecutor;
 
 import java.time.Duration;
+import java.util.List;
 
 public class BookAppointment {
 
@@ -165,8 +166,14 @@ public class BookAppointment {
 
         // slot selection
 
+        WebElement slotDate = wait.until(ExpectedConditions.elementToBeClickable(
+                By.xpath("//*[@id='card-info-wrapper']/mat-card/div[1]/button[2]//div[contains(@class,'week-day')]")
+        ));
+        slotDate.click();
+        System.out.println("Slot day clicked");
+
         WebElement slot = wait.until(ExpectedConditions.elementToBeClickable(
-                By.xpath("//button[contains(.,'07:00 PM') and (contains(.,'PM') or contains(.,'07'))]")
+                By.xpath("//button[contains(.,'01:00 PM') and (contains(.,'PM') or contains(.,'01'))]")
         ));
         slot.click();
         System.out.println("Slot is selected");
@@ -174,6 +181,8 @@ public class BookAppointment {
         // check box for non-Indian number
         WebElement checkBox = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[contains(text(), 'Please select incase of Non-Indian Number')]")));
         checkBox.click();
+
+
 
         // selecting city
         WebElement selectCity = wait.until(ExpectedConditions.elementToBeClickable(
@@ -188,6 +197,7 @@ public class BookAppointment {
 
 
 
+
         WebElement cityOption = wait.until(ExpectedConditions.visibilityOfElementLocated(
                 By.xpath("//mat-option//span[normalize-space()='Bangalore']")
         ));
@@ -198,17 +208,29 @@ public class BookAppointment {
 
 
         // consent checkbox
-        WebElement consentcheckbox = wait.until(ExpectedConditions.elementToBeClickable(
-                By.xpath("//mat-checkbox//span[contains(text(),'I hereby consent')]")
-        ));
-        consentcheckbox.click();
+//        WebElement consentcheckbox = wait.until(ExpectedConditions.elementToBeClickable(
+//                By.xpath("//mat-checkbox//span[contains(text(),'I hereby consent')]")
+//        ));
+//        consentcheckbox.click();
+
+
+        List<WebElement> checkboxes = wait.until(
+                ExpectedConditions.presenceOfAllElementsLocatedBy(
+                        By.xpath("//input[@type='checkbox']")
+                )
+        );
+        checkboxes.get(1).click();
         System.out.println("Consent check Box clicked");
 
         // Book Appointment clicked
-        WebElement BkVdApmnt = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//button[contains(text(), ' BOOK APPOINTMENT ')]")));
+        WebElement BkVdApmnt = wait.until(ExpectedConditions.elementToBeClickable(
+                By.xpath("//button[.//span[contains(text(),' BOOK APPOINTMENT ')]]")
+        ));
         BkVdApmnt.click();
         System.out.println("Booked the video appointment");
 
+        WebElement consentAgreeBtn = wait.until(ExpectedConditions.elementToBeClickable(By.className("consent-agree-btn")));
+        consentAgreeBtn.click();
         // close browser
 
         System.out.println("Press Enter to close...");
