@@ -149,10 +149,66 @@ public class BookAppointment {
         System.out.println("Continue clicked");
 
 
-        driver.findElement(By.xpath("//*[contains(@class,'font-bold color-light-grey font-1 mode') and contains(text(), ' VIDEO CALL ')]")).click();
+//        driver.findElement(By.xpath("//*[contains(@class,'font-bold color-light-grey font-1 mode') and contains(text(), ' VIDEO CALL ')]")).click();
 
 
-        driver.findElement(By.xpath("//button[.//span[normalize-space()=' SELECT ']]")).click();
+//        driver.findElement(By.xpath("//button[.//span[normalize-space()=' SELECT ']]")).click();
+
+        //
+
+        WebElement videoSelect = wait.until(ExpectedConditions.elementToBeClickable(
+                By.xpath("//div[contains(.,' VIDEO CALL ')]//button[.//text()[contains(.,' SELECT ')]]")
+        ));
+
+        videoSelect.click();
+        System.out.println("VIDEO CALL selected");
+
+        // slot selection
+
+        WebElement slot = wait.until(ExpectedConditions.elementToBeClickable(
+                By.xpath("//button[contains(.,'07:00 PM') and (contains(.,'PM') or contains(.,'07'))]")
+        ));
+        slot.click();
+        System.out.println("Slot is selected");
+
+        // check box for non-Indian number
+        WebElement checkBox = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[contains(text(), 'Please select incase of Non-Indian Number')]")));
+        checkBox.click();
+
+        // selecting city
+        WebElement selectCity = wait.until(ExpectedConditions.elementToBeClickable(
+                By.xpath("//mat-form-field[.//mat-label[contains(text(),'Select City')]]//mat-select")
+        ));
+        selectCity.click();
+        System.out.println("Slect city dropdown selected");
+//        ((JavascriptExecutor) driver).executeScript(
+//                "arguments[0].scrollIntoView({block: 'center'});", selectCity);
+
+//        selectCity.click();
+
+
+
+        WebElement cityOption = wait.until(ExpectedConditions.visibilityOfElementLocated(
+                By.xpath("//mat-option//span[normalize-space()='Bangalore']")
+        ));
+
+        cityOption.click();
+
+        System.out.println("City Selected");
+
+
+        // consent checkbox
+        WebElement consentcheckbox = wait.until(ExpectedConditions.elementToBeClickable(
+                By.xpath("//mat-checkbox//span[contains(text(),'I hereby consent')]")
+        ));
+        consentcheckbox.click();
+        System.out.println("Consent check Box clicked");
+
+        // Book Appointment clicked
+        WebElement BkVdApmnt = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//button[contains(text(), ' BOOK APPOINTMENT ')]")));
+        BkVdApmnt.click();
+        System.out.println("Booked the video appointment");
+
         // close browser
 
         System.out.println("Press Enter to close...");
