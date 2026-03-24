@@ -7,13 +7,14 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.JavascriptExecutor;
+import java.util.concurrent.TimeUnit;
 
 import java.time.Duration;
 import java.util.List;
 
 public class BookAppointment {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
 
         // Setup Chrome
         ChromeOptions options = new ChromeOptions();
@@ -171,17 +172,21 @@ public class BookAppointment {
         ));
         slotDate.click();
         System.out.println("Slot day clicked");
-
+        Thread.sleep(1000);
+        
+       
+        
         WebElement slot = wait.until(ExpectedConditions.elementToBeClickable(
-                By.xpath("//button[contains(.,'01:00 PM') and (contains(.,'PM') or contains(.,'01'))]")
+                By.xpath("//button[contains(.,'04:00 AM') and (contains(.,'AM') or contains(.,'04'))]")
         ));
         slot.click();
+        
         System.out.println("Slot is selected");
 
-        // check box for non-Indian number
+        // check box for non-Indian number selection
         WebElement checkBox = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[contains(text(), 'Please select incase of Non-Indian Number')]")));
         checkBox.click();
-
+        System.out.println("Non indian number check box clicked");
 
 
         // selecting city
@@ -190,14 +195,8 @@ public class BookAppointment {
         ));
         selectCity.click();
         System.out.println("Slect city dropdown selected");
-//        ((JavascriptExecutor) driver).executeScript(
-//                "arguments[0].scrollIntoView({block: 'center'});", selectCity);
 
-//        selectCity.click();
-
-
-
-
+        
         WebElement cityOption = wait.until(ExpectedConditions.visibilityOfElementLocated(
                 By.xpath("//mat-option//span[normalize-space()='Bangalore']")
         ));
